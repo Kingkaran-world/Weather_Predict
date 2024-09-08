@@ -23,6 +23,7 @@ def load_and_preprocess_data():
         data2 = pd.read_csv(file_path2)
     except FileNotFoundError:
         st.error(f"Error: One or both files were not found.")
+        st.toast("Please check CSV paths and try again.", type="error")
         st.stop()
     except pd.errors.EmptyDataError:
         st.error(f"Error: One or both files are empty.")
