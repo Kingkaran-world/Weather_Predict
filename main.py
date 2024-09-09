@@ -24,6 +24,8 @@ def load_and_preprocess_data():
     except FileNotFoundError:
         st.error(f"Error: One or both files were not found.")
         st.toast("Please check CSV paths and try again.", type="error")
+        # The step above will make sure that the Toast message is also being showwcased in the UI
+        # The st.stop() function will stop the execution of the code
         st.stop()
     except pd.errors.EmptyDataError:
         st.error(f"Error: One or both files are empty.")
