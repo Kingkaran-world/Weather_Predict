@@ -4,13 +4,7 @@ import tensorflow as tf
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 import numpy as np
-import xml.etree.ElementTree as ET
-import geopandas as gpd
-from shapely.geometry import Point
 from datetime import datetime
-import xml.etree.ElementTree as ET
-import geopandas as gpd
-from shapely.geometry import Polygon
 
 # Load and preprocess data from two CSV files
 @st.cache_data
@@ -24,8 +18,6 @@ def load_and_preprocess_data():
     except FileNotFoundError:
         st.error(f"Error: One or both files were not found.")
         st.toast("Please check CSV paths and try again.", type="error")
-        # The step above will make sure that the Toast message is also being showwcased in the UI
-        # The st.stop() function will stop the execution of the code
         st.stop()
     except pd.errors.EmptyDataError:
         st.error(f"Error: One or both files are empty.")
@@ -61,57 +53,6 @@ def load_and_preprocess_data():
 
     return data, label_encoder_district, label_encoder_station
 
-# Load flood-prone data from KML
-@st.cache_data
-def load_flood_data(kml_file):
-    try:
-        tree = ET.parse(kml_file)
-        root = tree.getroot()
-
-        # Get the namespace from the KML file
-        ns = {'kml': 'http://www.opengis.net/kml/2.2'}
-
-        flood_data = []
-
-        # Extract flood areas from KML
-        for placemark in root.findall('.//kml:Placemark', ns):
-            name_element = placemark.find('kml:name', ns)
-            name = name_element.text if name_element is not None else "Unnamed"
-
-            coords_element = placemark.find('.//kml:coordinates', ns)
-            if coords_element is not None and coords_element.text.strip():
-                coords_text = coords_element.text.strip()
-
-                # Parse the coordinates into (longitude, latitude) tuples
-                coords = []
-                for coord in coords_text.split():
-                    lon, lat, _ = map(float, coord.split(','))
-                    coords.append((lon, lat))
-
-                # Create a polygon from the coordinates
-                polygon = Polygon(coords)
-                flood_data.append({'name': name, 'polygon': polygon})
-
-        return flood_data
-
-    except ET.ParseError:
-        st.error("Error parsing KML file. Please ensure the KML file is correctly formatted.")
-        return []
-    except FileNotFoundError:
-        st.error("Error: KML file not found.")
-        return []
-
-# Check if a station is in a flood-prone area
-def is_flood_prone(station_location, flood_data):
-    station_point = Point(station_location)
-
-    for flood_area in flood_data:
-        flood_polygon = gpd.GeoSeries(flood_area['polygon']).unary_union
-        if flood_polygon.contains(station_point):
-            return True
-
-    return False
-
 # Train the model
 @st.cache_resource
 def train_model(X_train, y_train):
@@ -146,8 +87,8 @@ def train_model(X_train, y_train):
 
     return model, history
 
-# Predict rainfall likelihood and flood probability
-def predict_rain_and_flood(model, user_input_date, data, label_encoder_district, label_encoder_station, scaler, flood_data):
+# Predict rainfall likelihood
+def predict_rain(model, user_input_date, data, label_encoder_district, label_encoder_station, scaler):
     try:
         user_date = pd.to_datetime(user_input_date)
     except Exception as e:
@@ -174,26 +115,17 @@ def predict_rain_and_flood(model, user_input_date, data, label_encoder_district,
             # Apply logistic function to spread out probabilities
             rain_prob = 1 / (1 + np.exp(-10 * (rain_prob - 0.5)))
 
-            # Check flood probability
-            station_location = (data.loc[data['Station'] == station, 'Longitude'].values[0],
-                                data.loc[data['Station'] == station, 'Latitude'].values[0])
-
-            flood_prob = 100 if is_flood_prone(station_location, flood_data) else 0
-
-            predictions.append((dist, station, rain_prob * 100, flood_prob))
+            predictions.append((dist, station, rain_prob * 100))
 
     predictions.sort(key=lambda x: x[2], reverse=True)
     return predictions
 
 # Streamlit app
 def main():
-    st.title("Chennai Rainfall & Flood Prediction App")
+    st.title("Chennai Rainfall Prediction App")
 
     # Load and preprocess data
     data, label_encoder_district, label_encoder_station = load_and_preprocess_data()
-
-    # Load flood data
-    flood_data = load_flood_data('dataset/chennai_cflows_200_yr_return_periods.kml')
 
     # Prepare features and target
     X = data[['julian_date', 'dist_encoded', 'station_encoded', 'day', 'month', 'year']]
@@ -223,13 +155,13 @@ def main():
     st.line_chart(history_df[['accuracy', 'val_accuracy']])
 
     # User input
-    user_input_date = st.date_input("Select a date to predict rainfall and flood:")
+    user_input_date = st.date_input("Select a date to predict rainfall:")
 
     if st.button("Predict"):
         if user_input_date is None:
             st.error("Please select a valid date.")
         else:
-            predictions = predict_rain_and_flood(model, user_input_date, data, label_encoder_district, label_encoder_station, scaler, flood_data)
+            predictions = predict_rain(model, user_input_date, data, label_encoder_district, label_encoder_station, scaler)
 
             if predictions:
                 st.subheader(f"Predictions for {user_input_date.strftime('%d-%m-%Y')}")
@@ -237,12 +169,12 @@ def main():
                 # Display top 5 predictions
                 st.write("### Top 5 Locations Most Likely to Receive Rain:")
                 top_5 = predictions[:5]
-                for i, (district, station, rain_prob, flood_prob) in enumerate(top_5, 1):
-                    st.write(f"{i}. **District:** {district}, **Station:** {station}, **Rain Probability:** {rain_prob:.2f}%, **Flood Probability:** {flood_prob:.2f}%")
+                for i, (district, station, rain_prob) in enumerate(top_5, 1):
+                    st.write(f"{i}. **District:** {district}, **Station:** {station}, **Rain Probability:** {rain_prob:.2f}%")
                 
                 # Plot all predictions
                 st.subheader("All Predictions")
-                df_predictions = pd.DataFrame(predictions, columns=['District', 'Station', 'Rain Probability (%)', 'Flood Probability (%)'])
+                df_predictions = pd.DataFrame(predictions, columns=['District', 'Station', 'Rain Probability (%)'])
                 st.dataframe(df_predictions)
 
 if __name__ == "__main__":
