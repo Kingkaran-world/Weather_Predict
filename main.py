@@ -61,13 +61,13 @@ def load_and_preprocess_data():
     try:
         data = pd.read_csv(file_path)
     except FileNotFoundError:
-        st.error(f"Error: File was not found.")
+        st.error("Error: File was not found.")
         st.stop()
     except pd.errors.EmptyDataError:
-        st.error(f"Error: The file is empty.")
+        st.error("Error: The file is empty.")
         st.stop()
     except pd.errors.ParserError:
-        st.error(f"Error: Unable to parse the CSV file. Please ensure it is a valid CSV file.")
+        st.error("Error: Unable to parse the CSV file. Please ensure it is a valid CSV file.")
         st.stop()
 
     data['Date'] = pd.to_datetime(data['Date'], errors='coerce')
@@ -105,7 +105,7 @@ def load_and_preprocess_data():
 # Train the model
 @st.cache_resource
 def train_model(X_train, y_train):
-    input_shape = X_train.shape[1]  # Ensure input shape is correct (12 features)
+    input_shape = X_train.shape[1]
     model = tf.keras.Sequential([
         tf.keras.layers.Input(shape=(input_shape,)), 
         tf.keras.layers.Dense(256, activation='relu'),
@@ -139,7 +139,6 @@ def train_model(X_train, y_train):
 # Predict rainfall likelihood
 def predict_rain(model, user_input_date, data, label_encoder_district, label_encoder_station, scaler):
     try:
-        # Convert the user input date to a datetime object
         user_date = pd.to_datetime(user_input_date)
     except Exception as e:
         st.error(f"Error parsing the input date: {e}")
@@ -157,7 +156,6 @@ def predict_rain(model, user_input_date, data, label_encoder_district, label_enc
     day_sin = np.sin(2 * np.pi * day / 31)
     day_cos = np.cos(2 * np.pi * day / 31)
 
-    # Collect input features in the same order and format as in the training data
     predictions = []
     for dist in data['District'].unique():
         dist_encoded = label_encoder_district.transform([dist])[0]
@@ -165,17 +163,11 @@ def predict_rain(model, user_input_date, data, label_encoder_district, label_enc
             station_encoded = label_encoder_station.transform([station])[0]
             input_data = np.array([[julian_date, dist_encoded, station_encoded, day, month, year,
                                     day_of_week, is_weekend, month_sin, month_cos, day_sin, day_cos]])
-            # Ensure the input data has the same feature shape and order as the scaler expects
             input_data_scaled = scaler.transform(input_data)
-
-            # Predict probability of rain and clip between 0 and 1 to avoid extreme predictions
             rain_prob = np.clip(model.predict(input_data_scaled)[0][0], 0, 1)
-
-            predictions.append((dist, station, rain_prob * 100))  # Append the prediction result for all locations
+            predictions.append((dist, station, rain_prob * 100))  
 
     return predictions
-
-
 
 # Save model and scaler
 def save_model_and_scaler(model, scaler):
@@ -314,18 +306,6 @@ def main():
         fig = px.histogram(data, x='Rainfall', nbins=50, title='Distribution of Rainfall')
         st.plotly_chart(fig, use_container_width=True)
 
-    elif page == "Data Exploration":
-        st.header("Data Exploration")
-
-        # Summary statistics
-        st.subheader("Summary Statistics")
-        st.write(data.describe())
-
-        # Rainfall distribution
-        st.subheader("Rainfall Distribution")
-        fig = px.histogram(data, x='Rainfall', nbins=50, title='Distribution of Rainfall')
-        st.plotly_chart(fig, use_container_width=True)
-
         # Rainfall by district
         st.subheader("Average Rainfall by District")
         district_rainfall = data.groupby('District')['Rainfall'].mean().sort_values(ascending=False)
@@ -430,8 +410,6 @@ def main():
             st.error(f"An error occurred while evaluating the model: {str(e)}")
             st.info("Please ensure that the model is properly trained and saved.")
 
-    
-
     elif page == "About":
         st.header("About This App")
         st.write("""
@@ -458,7 +436,6 @@ def main():
         st.subheader("Feedback")
         feedback = st.text_area("We'd love to hear your thoughts on the app. Please leave your feedback below:")
         if st.button("Submit Feedback"):
-            # Here you would typically save this feedback to a database or file
             st.success("Thank you for your feedback!")
 
         # Add version information
