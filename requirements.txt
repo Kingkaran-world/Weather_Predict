@@ -1,7 +1,8 @@
+pip==24.2
 streamlit==1.26.0
 pandas==1.5.3
 numpy==1.24.3
-tensorflow==2.12.0
+tensorflow==2.11.0
 scikit-learn==1.2.2
 matplotlib==3.7.1
 seaborn==0.12.2
@@ -11,3 +12,4 @@ folium==0.14.0
 streamlit-folium==0.13.0
 setuptools>=58.0.0
 wheel
+distlib==0.3.6
