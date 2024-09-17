@@ -2,7 +2,6 @@ pip>=24.2
 setuptools>=58.0.0
 wheel
 distlib==0.3.6
-python3-distutils  # Add this if needed
 streamlit==1.26.0
 pandas==1.5.3
 numpy==1.24.3
