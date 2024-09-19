@@ -16,7 +16,7 @@ import calendar
 from streamlit_folium import folium_static
 import folium
 from folium.plugins import HeatMap
-
+#lol
 # Set page config
 st.set_page_config(page_title="Chennai Rainfall Prediction", page_icon="🌧️", layout="wide")
 
