@@ -1,11 +1,11 @@
 pip>=24.2
-setuptools>=58.0.0
+setuptools>=65.5.1
 wheel
 distlib==0.3.6
 streamlit==1.26.0
 pandas==1.5.3
 numpy==1.24.3
-tensorflow==2.11.0  # Or 2.12.0 with compatible Python version
+tensorflow>=2.11.0,<2.14.0  # Compatible TensorFlow version
 scikit-learn==1.2.2
 matplotlib==3.7.1
 seaborn==0.12.2
