@@ -427,8 +427,10 @@ def main():
 
         Note: Predictions are based on historical patterns and may not account for all factors affecting weather. Always refer to official weather forecasts for critical decision-making.
 
-        Created by: [Your Name]
-        Last Updated: [Current Date]
+        Credits: John Paul , Frontend Developer
+                 Param Varsha , Streamlit Developer
+                 Karan S , Data Researcher and Analyst
+        Last Updated: 
         Version: 1.0.0
         """)
 
