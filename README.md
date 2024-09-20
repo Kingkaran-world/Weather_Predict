@@ -5,6 +5,9 @@
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-FF6F00)
 ![Python](https://img.shields.io/badge/Python-3.7%2B-blue)
 
+[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
+
+
 A sophisticated web application that predicts rainfall in Chennai using machine learning techniques. This app provides valuable insights into rainfall patterns and offers predictions for specific dates and locations within Chennai.
 
 ## Table of Contents
@@ -108,4 +111,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 © 2024 Chennai Rainfall Prediction App. All rights reserved.
-[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
