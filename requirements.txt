@@ -1,4 +1,4 @@
-tensorflow<=2.11.1,>=2.9.0  # Specify a compatible range of TensorFlow versions
+tensorflow 
 pip>=24.2
 setuptools>=65.5.1
 wheel
