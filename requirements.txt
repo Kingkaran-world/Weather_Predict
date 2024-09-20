@@ -1,7 +1,9 @@
 pip>=24.2
 setuptools>=65.5.1
 wheel
+distutils  # Added to ensure distutils is installed
 distlib==0.3.6
+--force-reinstall setuptools  # Force reinstall setuptools to avoid conflicts
 streamlit==1.26.0
 pandas==1.5.3
 numpy==1.24.3
