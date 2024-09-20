@@ -3,7 +3,6 @@
 ![Chennai Rainfall Prediction](https://img.shields.io/badge/Chennai-Rainfall%20Prediction-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.2.0-FF4B4B)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-FF6F00)
-![Python](https://img.shields.io/badge/Python-3.7%2B-blue)
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 
