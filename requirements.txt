@@ -6,7 +6,7 @@ distlib==0.3.6
 streamlit==1.26.0
 pandas==1.5.3
 numpy==1.24.3
-tensorflow>=2.11.0,<2.14.0  # Compatible TensorFlow version
+tensorflow<=2.11.1  # Compatible TensorFlow version
 scikit-learn==1.2.2
 matplotlib==3.7.1
 seaborn==0.12.2
