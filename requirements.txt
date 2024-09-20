@@ -1,12 +1,10 @@
+tensorflow<=2.11.1,>=2.9.0  # Specify a compatible range of TensorFlow versions
 pip>=24.2
 setuptools>=65.5.1
-wheel # Added to ensure distutils is installed
-distlib==0.3.6
- # Force reinstall setuptools to avoid conflicts
+wheel
 streamlit==1.26.0
 pandas==1.5.3
 numpy==1.24.3
-tensorflow<=2.11.1  # Compatible TensorFlow version
 scikit-learn==1.2.2
 matplotlib==3.7.1
 seaborn==0.12.2
