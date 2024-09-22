@@ -55,7 +55,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Load and preprocess data
-# more than 40k records in csv
+# more than 40k+ records in csv
 @st.cache_data
 def load_and_preprocess_data():
     file_path = 'dataset/Preprocessed_Data.csv'
