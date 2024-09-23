@@ -104,6 +104,7 @@ def load_and_preprocess_data():
     return data, label_encoder_district, label_encoder_station
 
 # Train the model
+# utilizing deep learning model and Keras API
 @st.cache_resource
 def train_model(X_train, y_train):
     input_shape = X_train.shape[1]
