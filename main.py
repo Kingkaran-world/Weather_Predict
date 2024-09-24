@@ -267,6 +267,7 @@ def main():
         if st.button("Predict", key='predict_button'):
             if user_input_date is None:
                 st.error("Please select a valid date.")
+                st.error("The date should be within the range of available data.")
             else:
                 predictions = predict_rain(model, user_input_date, data, label_encoder_district, label_encoder_station, scaler)
 
