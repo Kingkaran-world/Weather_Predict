@@ -226,7 +226,7 @@ def main():
             st.metric("Rainy Days", f"{data['rain'].sum():,} ({data['rain'].mean()*100:.2f}%)")
         with col4:
             st.metric("Avg. Rainfall", f"{data['Rainfall'].mean():.2f} mm")
-
+        # fixes
         st.subheader("Recent Weather Trends")
         recent_data = data.sort_values('Date').tail(30)
         fig = px.line(recent_data, x='Date', y='Rainfall', title='Rainfall in the Last 30 Days')
