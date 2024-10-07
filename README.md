@@ -1,8 +1,8 @@
+# Weatherit
 <p align="center">
   <img src="https://github.com/RJohnPaul/YouNotes/blob/67253a9687c34fc289b2898b3338b49ad80312a1/younotes.png" alt="YouNotes Logo"/>
 </p>
 
-# Weatherit
 
 ![Chennai Rainfall Prediction](https://img.shields.io/badge/Chennai-Rainfall%20Prediction-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.2.0-FF4B4B)
