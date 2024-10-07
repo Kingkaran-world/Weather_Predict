@@ -1,15 +1,8 @@
-# Weatherit
 <p align="center">
   <img src="https://github.com/RJohnPaul/YouNotes/blob/67253a9687c34fc289b2898b3338b49ad80312a1/younotes.png" alt="YouNotes Logo"/>
 </p>
 
-
-![Chennai Rainfall Prediction](https://img.shields.io/badge/Chennai-Rainfall%20Prediction-blue)
-![Streamlit](https://img.shields.io/badge/Streamlit-1.2.0-FF4B4B)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-FF6F00)
-
-[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
-
+# Weatherit
 
 A sophisticated web application that predicts rainfall in Chennai using machine learning techniques. This app provides valuable insights into rainfall patterns and offers predictions for specific dates and locations within Chennai.
 
@@ -112,5 +105,9 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
+![Chennai Rainfall Prediction](https://img.shields.io/badge/Chennai-Rainfall%20Prediction-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.2.0-FF4B4B)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-FF6F00)
 
+[![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
 © 2024 Chennai Rainfall Prediction App. All rights reserved.
