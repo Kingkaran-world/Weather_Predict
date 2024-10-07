@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/RJohnPaul/Weather_Predict/blob/029041751b9beb8d33113129d754ed01b1074cf8/Bento-Grid%20(6).png" alt=""/>
+  <img src="https://github.com/RJohnPaul/Weather_Predict/blob/6a938f95672dab6f80691ceeaab8b7895e07679c/Bento-Grid%20(7).png" alt=""/>
 </p>
 
 # Weatherit
