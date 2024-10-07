@@ -110,4 +110,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-FF6F00)
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://forthebadge.com)
+
+---
 © 2024 Chennai Rainfall Prediction App. All rights reserved.
