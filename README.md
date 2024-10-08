@@ -6,8 +6,8 @@
 
 A sophisticated web application that predicts rainfall in Chennai using machine learning techniques. This app provides valuable insights into rainfall patterns and offers predictions for specific dates and locations within Chennai.
 
-
-![Vid](https://github.com/RJohnPaul/Weather_Predict/blob/20e9d47cf00a73722352390ec4154a278a8917f1/Vid.mp4)
+# Demo
+![Vid](https://github.com/RJohnPaul/Weather_Predict/blob/51f589ee0987fb82e0adad32de5fcae4ff0d0bdf/demogif.gif)
 
 
 ## Table of Contents
