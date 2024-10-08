@@ -8,7 +8,7 @@ A sophisticated web application that predicts rainfall in Chennai using machine 
 
 ## Demo
 
- ![](https://github.com/RJohnPaul/QRGen/blob/82dba01418449df23c034dfb6455ce678a4410ff/gif.gif)
+ ![](https://github.com/RJohnPaul/Weather_Predict/blob/20e9d47cf00a73722352390ec4154a278a8917f1/Vid.mp4)
  
 ## Table of Contents
 
